@@ -15,6 +15,7 @@ def main():
     ch_img = pg.transform.flip(ch_img, True, False)
     ch_rct = ch_img.get_rect()#工科トンのRectを抽出
     tmr = 0
+    speed = 1
     ch_rct.center = 300, 200
     
     while True:
@@ -28,18 +29,18 @@ def main():
         screen.blit(bg_img2, [-x+4800, 0])#背景画像
         ksy_lst = pg.key.get_pressed()#keyの状態を取得
         if ksy_lst[pg.K_UP]:#↑
-            ch_rct.move_ip((0, -1))
+            ch_rct.move_ip((0, -speed))
         elif ksy_lst[pg.K_DOWN]:#↓
-            ch_rct.move_ip((0, 1))
+            ch_rct.move_ip((0, speed))
         elif ksy_lst[pg.K_LEFT]:#←
-            ch_rct.move_ip((-1, 0))
+            ch_rct.move_ip((-speed*2, 0))#後ろに下がるための調節
         elif ksy_lst[pg.K_RIGHT]:#→
-            ch_rct.move_ip((1, 0))
-        # else:#流されるなら
-        #     ch_rct.move_ip((-1, 0))
+            ch_rct.move_ip((speed*2, 0))#前に二倍速で進む
+        else:#流されるなら
+            ch_rct.move_ip((-speed, 0))
         screen.blit(ch_img, ch_rct)#工科トンの配置
         pg.display.update()
-        tmr += 1
+        tmr += speed
         clock.tick(200)#fps
 
 
