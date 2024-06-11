@@ -24,7 +24,7 @@ def main():
         screen.blit(ch_img, ch_rct)#工科トンの配置
         pg.display.update()
         tmr += 1
-        clock.tick(200)
+        clock.tick(200)#fps
 
 
 if __name__ == "__main__":
