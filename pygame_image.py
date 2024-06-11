@@ -18,7 +18,9 @@ def main():
             if event.type == pg.QUIT: return
 
         screen.blit(bg_img, [0, 0])#背景画像
-        screen.blit(ch_img, [300, 200])#工科トンの配置
+        ch_rct = ch_img.get_rect()#工科トンのRectを抽出
+        ch_rct.center = 300, 200
+        screen.blit(ch_img, ch_rct)#工科トンの配置
         pg.display.update()
         tmr += 1        
         clock.tick(10)
