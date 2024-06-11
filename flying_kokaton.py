@@ -16,6 +16,8 @@ def main():
     ch_rct = ch_img.get_rect()#工科トンのRectを抽出
     tmr = 0
     speed = 1
+    move_chance_a = True
+    move_chance_b = True
     ch_rct.center = 300, 200
     
     while True:
@@ -29,17 +31,28 @@ def main():
         screen.blit(bg_img2, [-x+4800, 0])#背景画像
         ksy_lst = pg.key.get_pressed()#keyの状態を取得
         if ksy_lst[pg.K_UP]:#↑
-            ch_rct.move_ip((0, -speed))
+            if move_chance_a:
+                ch_rct.move_ip((0, -speed))
+            move_chance_b = False
         elif ksy_lst[pg.K_DOWN]:#↓
-            ch_rct.move_ip((0, speed))
+            if move_chance_a:
+                ch_rct.move_ip((0, speed))
+            move_chance_b = False
         elif ksy_lst[pg.K_LEFT]:#←
-            ch_rct.move_ip((-speed*2, 0))#後ろに下がるための調節
+            if move_chance_a:
+                ch_rct.move_ip((-speed*2, 0))#後ろに下がるための調節
+            move_chance_b = False
         elif ksy_lst[pg.K_RIGHT]:#→
-            ch_rct.move_ip((speed*2, 0))#前に二倍速で進む
-        else:#流されるなら
-            ch_rct.move_ip((-speed, 0))
+            if move_chance_a:
+                ch_rct.move_ip((speed*2, 0))#前に二倍速で進む
+            move_chance_b = False
+        else:
+            if move_chance_b == False:
+                move_chance_a = False
+                
         screen.blit(ch_img, ch_rct)#工科トンの配置
         pg.display.update()
+        ch_rct.move_ip((-speed, 0))#流れていくこうかとん
         tmr += speed
         clock.tick(200)#fps
 
