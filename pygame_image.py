@@ -13,7 +13,10 @@ def main():
     bg_img2 = pg.transform.flip(bg_img1, True, False)
     ch_img = pg.image.load("fig/3.png")
     ch_img = pg.transform.flip(ch_img, True, False)
+    ch_rct = ch_img.get_rect()#工科トンのRectを抽出
     tmr = 0
+    ch_rct.center = 300, 200
+    
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
@@ -23,8 +26,17 @@ def main():
         screen.blit(bg_img2, [-x+1600, 0])#背景画像
         screen.blit(bg_img1, [-x+3200, 0])#背景画像
         screen.blit(bg_img2, [-x+4800, 0])#背景画像
-        ch_rct = ch_img.get_rect()#工科トンのRectを抽出
-        ch_rct.center = 300, 200
+        ksy_lst = pg.key.get_pressed()#keyの状態を取得
+        if ksy_lst[pg.K_UP]:#↑
+            ch_rct.move_ip((0, -1))
+        elif ksy_lst[pg.K_DOWN]:#↓
+            ch_rct.move_ip((0, 1))
+        elif ksy_lst[pg.K_LEFT]:#←
+            ch_rct.move_ip((-1, 0))
+        elif ksy_lst[pg.K_RIGHT]:#→
+            ch_rct.move_ip((1, 0))
+        # else:#流されるなら
+        #     ch_rct.move_ip((-1, 0))
         screen.blit(ch_img, ch_rct)#工科トンの配置
         pg.display.update()
         tmr += 1
