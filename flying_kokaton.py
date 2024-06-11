@@ -30,9 +30,9 @@ def main():
         screen.blit(bg_img2, [-x+4800, 0])#背景画像
         ksy_lst = pg.key.get_pressed()#keyの状態を取得
         if ksy_lst[pg.K_UP]:#↑
-            move = (0, -speed)
+            move = (-speed, -speed)
         elif ksy_lst[pg.K_DOWN]:#↓
-            move =(0, speed)
+            move =(-speed, speed)
         elif ksy_lst[pg.K_LEFT]:#←
             move = (-speed*2, 0)
         elif ksy_lst[pg.K_RIGHT]:#→
