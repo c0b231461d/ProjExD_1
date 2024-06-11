@@ -16,13 +16,14 @@ def main():
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
-
-        screen.blit(bg_img, [0, 0])#背景画像
+            
+        x = tmr%800
+        screen.blit(bg_img, [-x, 0])#背景画像
         ch_rct = ch_img.get_rect()#工科トンのRectを抽出
         ch_rct.center = 300, 200
         screen.blit(ch_img, ch_rct)#工科トンの配置
         pg.display.update()
-        tmr += 1        
+        tmr += 1
         clock.tick(200)
 
 
